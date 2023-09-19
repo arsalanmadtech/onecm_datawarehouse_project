@@ -53,6 +53,13 @@ explore: sales {
     sql_on: ${sales.customer_id} = ${customers.id} ;;
     relationship: many_to_one
   }
+
+  join: sales_30daysago {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${sales.location_id} = ${sales_30daysago.location_id}
+    and  DATE(${sales.complete_date_30daysago_date}) = DATE(${sales_30daysago.completed_date_date});;
+  }
   join: sales__taxes {
     view_label: "Sales: Taxes"
     sql: LEFT JOIN UNNEST(${sales.taxes}) as sales__taxes ;;

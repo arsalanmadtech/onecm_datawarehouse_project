@@ -15,10 +15,17 @@ view: sales {
     type: number
     sql: ${TABLE}.companyId ;;
   }
-  dimension: complete_date {
-    type: string
-    sql: ${TABLE}.completeDate ;;
+  dimension_group: complete_date {
+    type: time
+    sql: PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%E*SZ',${TABLE}.completeDate) ;;
   }
+
+  dimension_group: complete_date_30daysago {
+    type: time
+    sql: DATE_ADD(${complete_date_date}, INTERVAL -30 DAY) ;;
+  }
+
+
   dimension: custom_id {
     type: string
     sql: ${TABLE}.customId ;;
@@ -85,6 +92,13 @@ view: sales {
     type: number
     sql: ${TABLE}.total ;;
   }
+
+  measure: TotalSales {
+    view_label: "Total Sales"
+    type: sum
+    sql: ${total} ;;
+  }
+
   dimension: transactions {
     hidden: yes
     sql: ${TABLE}.transactions ;;
