@@ -22,7 +22,7 @@ view: sales {
 
   dimension_group: complete_date_30daysago {
     type: time
-    sql: DATE_ADD(${complete_date_date}, INTERVAL -30 DAY) ;;
+    sql: DATE_ADD(${complete_date_date}, INTERVAL -31 DAY) ;;
   }
 
 
