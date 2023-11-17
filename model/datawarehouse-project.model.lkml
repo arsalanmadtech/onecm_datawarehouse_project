@@ -3,12 +3,12 @@ connection: "datawarehouse-390222_project"
 # include all the views
 include: "/views/**/*.view.lkml"
 
-datagroup: datawarehouse-project_default_datagroup {
+datagroup: datawarehouseproject_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
 
-persist_with: datawarehouse-project_default_datagroup
+persist_with: datawarehouseproject_default_datagroup
 
 explore: customers {}
 
